@@ -14,7 +14,7 @@ if fs == 0
     averages = [];
     
     i1 = 1;
-    i2 = find(cumsum(duration)>=win_size,1);
+    i2 = find(cumsum(duration,'omitnan')>=win_size,1);
     i3 = 1;
     
     while i2 <= length(data)
@@ -22,7 +22,7 @@ if fs == 0
       averages(i3,1) = time(i1);
       i3=i3+1; 
       i1=i2+1;
-      i2=find(cumsum(duration(i1:end))>=win_size,1) + i1-1;
+      i2=find(cumsum(duration(i1:end),'omitnan')>=win_size,1) + i1-1;
       if isempty(i2), break, end
     end 
 else 

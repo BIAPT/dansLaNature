@@ -15,7 +15,7 @@ if fs == 0
     duration = diff(convert_time);
     
     i1 = 1;
-    i2 = find(cumsum(duration)>=win_size,1);
+    i2 = find(cumsum(duration,'omitnan')>=win_size,1);
     i3 = 1;
     
     while i2 <= length(data)
