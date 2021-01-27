@@ -2,8 +2,8 @@
 
 clear;
 
-LOAD_DIR = "/Volumes/Seagate/danslaNature/data/2020-09-19/group1/008/";
-OUT_DIR = "/Volumes/Seagate/danslaNature/analysis/2020-09-19/group1/008/";
+LOAD_DIR = "/Volumes/Seagate/danslaNature/data/2020-09-19/group1/003/";
+OUT_DIR = "/Volumes/Seagate/danslaNature/analysis/2020-09-19/group1/003/";
 
 D = dir(LOAD_DIR);
 subfolders = setdiff({D([D.isdir]).name},{'.','..'}); % list of subfolders of D

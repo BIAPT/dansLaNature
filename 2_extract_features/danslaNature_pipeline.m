@@ -8,8 +8,8 @@
 clear;
 
 % Load table with timstamps for a group
-timestamps = readtable('/Users/biomusic/OneDrive - McGill University/dansLaNature/Section Timestamps/sept19_group1_timestamps.csv','PreserveVariableNames',true);
-LOAD_DIR = "/Volumes/Seagate/danslaNature/analysis/2020-09-19/group1/testgroup/";
+timestamps = readtable('/Users/biomusic/OneDrive - McGill University/dansLaNature/SectionTimestamps/sept19_group1_timestamps.csv','PreserveVariableNames',true);
+LOAD_DIR = "/Volumes/Seagate/danslaNature/analysis/2020-09-19/group1/";
 OUT_DIR = LOAD_DIR;
 
 %%
