@@ -73,11 +73,11 @@ save(strcat(file,'_slopes.mat'),'-struct','slopes');
 %% Extract a single segment and save it 
 
 clear;
-load('/Volumes/Seagate/danslaNature/analysis/2020-09-27/group2/055/clean.mat')
-OUT_DIR = "/Volumes/Seagate/danslaNature/analysis/2020-09-27/group2/055/";
-start_time = datetime('2020-09-27 15:05:00','InputFormat','yyyy-MM-dd HH:mm:ss','TimeZone','America/New_York');
-end_time = datetime('2020-09-27 15:17:00','InputFormat','yyyy-MM-dd HH:mm:ss','TimeZone','America/New_York');
-segment_name = 'before_forest';
+load('/Volumes/Seagate/danslaNature/analysis/data/Journal_final_participants/016/clean.mat')
+OUT_DIR = "/Volumes/Seagate/danslaNature/analysis/data/Journal_final_participants/016/";
+start_time = datetime('2020-09-19 16:14:00','InputFormat','yyyy-MM-dd HH:mm:ss','TimeZone','America/New_York');
+end_time = datetime('2020-09-19 16:21:00','InputFormat','yyyy-MM-dd HH:mm:ss','TimeZone','America/New_York');
+segment_name = 'walking3_barefoot';
 
 % Find the window in data by finding the closest time to t1 and t2.
 EDA_time = unix_to_datetime(EDA(:,1));

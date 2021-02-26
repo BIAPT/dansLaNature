@@ -1,20 +1,21 @@
 % Dannie Fu Novemeber 23 2020
 %
-% This script formats the danslanature data so that it can be input into
-% JASP and saves it as a csv file. 
+% This script formats the danslanature data in wide format so that it can be input into
+% JASP or SAS and saves it as a csv file. 
 %
 % ------------------
 
-% Good participants: 1,2,8,9,11,13,16,21,37,54
 clear;
 
-LOAD_DIR = '/Volumes/Seagate/danslaNature/analysis/final_participants/';
-OUT_DIR = '/Volumes/Seagate/danslaNature/JASP_analysis/';
+LOAD_DIR = '/Volumes/Seagate/danslaNature/analysis/Journal_final_participants/';
+OUT_DIR = '/Volumes/Seagate/danslaNature/JASP_analysis/allsection/mixed_model/';
+SAVE_NAME = 'dln_finalparticipants_long';
+
 sections = {'before_forest','after_forest','stop0_stumps_sitting','stop1_breathing','stop2_oldtree','stop3_ferns','stop4_pinetrees','walking3_barefoot'};
 D = dir(LOAD_DIR);
 subfolders = setdiff({D([D.isdir]).name},{'.','..'}); % list of subfolders of D
 
-% Columns of JASP table
+% Columns of table
 Participants = [];
 stdEDAslopes_before = [];
 stdEDAslopes_after = [];
@@ -113,4 +114,4 @@ for k=1:length(subfolders)
 end 
 
 % Save as csv file
-writetable(JASPtable,strcat(OUT_DIR,'JASPtable2.csv'));
+writetable(JASPtable,strcat(OUT_DIR,SAVE_NAME));
