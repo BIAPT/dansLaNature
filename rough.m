@@ -5,54 +5,48 @@
 
 %% Unpad ending of full data
 
-before_forest.EDA = unpadEnd(EDA,0, 15);
-before_forest.TEMP = unpadEnd(TEMP, 0, 15);
-before_forest.HR = unpadEnd(HR, 0, 1);
-before_forest.HRVX = unpadEnd(HRVX,60, 4);
-before_forest.HRVY = unpadEnd(HRVY,60, 4);
-before_forest.HRVZ = unpadEnd(HRVZ,60, 4);
-before_forest.HRVYZ = unpadEnd(HRVYZ,60, 4);
+section.EDA = unpadEnd(EDA,0, 15);
+section.TEMP = unpadEnd(TEMP, 0, 15);
+section.HR = unpadEnd(HR, 0, 1);
+section.HRVX = unpadEnd(HRVX,60, 4);
+section.HRVY = unpadEnd(HRVY,60, 4);
+section.HRVZ = unpadEnd(HRVZ,60, 4);
+section.HRVYZ = unpadEnd(HRVYZ,60, 4);
 
 save(strcat('/Volumes/Seagate/danslaNature/analysis/2020-09-19/group1/008/','clean.mat'),'-struct','clean');
 
 %% Unpad ending of section
 clear
-load_file = "/Volumes/Seagate/danslaNature/analysis/2020-09-27/group2/056/stop0_stumps_sitting.mat";
+load_file = "/Volumes/Seagate/danslaNature/analysis/data/Journal_final_participants/014/stop3_ferns.mat";
 
 load(load_file);
-cutsize=60;
-before_forest.EDA_window = unpadEnd(EDA_window,cutsize, 15);
-before_forest.TEMP_window = unpadEnd(TEMP_window, cutsize, 15);
-before_forest.HR_window = unpadEnd(HR_window, cutsize, 0.1);
-%stop3_ferns.HR_window = HR_window;
-before_forest.HRVZ_window = unpadEnd(HRVZ_window,cutsize, 4);
-%stop2_oldtree.HRVZ_window = HRVZ_window;
-before_forest.HRVYZ_window = unpadEnd(HRVYZ_window, cutsize, 4);
+cutsize=180;
+section.EDA_window = unpadEnd(EDA_window,cutsize, 15);
+section.TEMP_window = unpadEnd(TEMP_window, cutsize, 15);
+section.HR_window = unpadEnd(HR_window, cutsize, 0.1);
+section.HRVZ_window = unpadEnd(HRVZ_window,cutsize, 4);
+section.HRVYZ_window = unpadEnd(HRVYZ_window, cutsize, 4);
 
-save(load_file,'-struct','stop0_stumps_sitting');
+save(load_file,'-struct','section');
 
 %% Unpad beginning of section
 clear
-load_file = "/Volumes/Seagate/danslaNature/analysis/2020-09-27/group2/056/before_forest.mat";
+load_file = "/Volumes/Seagate/danslaNature/analysis/data/Journal_final_participants/054/walking3_barefoot.mat";
 
 load(load_file);
-cutsize = 120;
-before_forest.EDA_window = unpadBeginning(EDA_window,cutsize, 15);
-before_forest.TEMP_window = unpadBeginning(TEMP_window, cutsize, 15);
-before_forest.HR_window = unpadBeginning(HR_window, cutsize, 0.1);
-%before_forest.HR_window = HR_window;
-before_forest.HRVZ_window = unpadBeginning(HRVZ_window,cutsize, 4);
-before_forest.HRVYZ_window = unpadBeginning(HRVYZ_window,cutsize, 4);
+cutsize = 60;
+section.EDA_window = unpadBeginning(EDA_window,cutsize, 15);
+section.TEMP_window = unpadBeginning(TEMP_window, cutsize, 15);
+section.HR_window = unpadBeginning(HR_window, cutsize, 0.1);
+section.HRVZ_window = unpadBeginning(HRVZ_window,cutsize, 4);
+section.HRVYZ_window = unpadBeginning(HRVYZ_window,cutsize, 4);
 
-save(load_file,'-struct','before_forest');
-
-
+save(load_file,'-struct','section');
 %% Compute sliding averages and slopes following trimming the data
-clear
-addpath("/Users/biomusic/Documents/dansLaNature/");
-file = "/Volumes/Seagate/danslaNature/analysis/2020-09-27/group2/056/before_forest";
+clear;
+file = "/Volumes/Seagate/danslaNature/analysis/data/Journal_final_participants/014/stop3_ferns";
 
-load(strcat(file,'.mat'));
+load(strcat(file,".mat"));
 
 % Compute sliding averages. computeAverage[data,fs,windowsize(sec),stepsize(sec)]
 ave.EDA = computeAverage(EDA_window, 15, 60, 1);
@@ -447,7 +441,7 @@ legend("Sept 19", "Sept 26, Sept 27");
 
 clear;
 
-LOAD_DIR = '/Volumes/Seagate/danslaNature/analysis/2020-09-26/group1/021/';
+LOAD_DIR = '/Volumes/Seagate/danslaNature/analysis/data/Journal_final_participants/045/';
 sections = {'before_forest','stop0_stumps_sitting','stop1_breathing','stop2_oldtree','walking3_barefoot','stop3_ferns','stop4_pinetrees','stop4_nixon', 'after_forest'};
 
 for i=1:length(sections)
@@ -456,37 +450,62 @@ for i=1:length(sections)
         load(strcat(LOAD_DIR,char(sections(i)),".mat"));
 
         figure
-        subplot(5,1,1)
+        subplot(3,1,1)
         plot(unix_to_datetime(EDA_window(:,1)),EDA_window(:,2),'LineWidth',1, 'Color', '#f6a753')
         ylabel("EDA (us)")
         title(char(sections(i)))
         set(gca,'FontSize',14) 
 
-        subplot(5,1,2)  
+        subplot(3,1,2)  
         plot(unix_to_datetime(TEMP_window(:,1)),TEMP_window(:,2),'LineWidth',1,'Color', '#699bdd')
         ylabel("Temperature (C)")
         set(gca,'FontSize',14)
 
-        subplot(5,1,3)
+        subplot(3,1,3)
         plot(unix_to_datetime(HR_window(:,1)), HR_window(:,2),'LineWidth',1, 'Color', '#94d169')
         ylabel("Heart rate")
         set(gca,'FontSize',14)
 
-        subplot(5,1,4)
-        plot(unix_to_datetime(HRVYZ_window(:,1)), HRVYZ_window(:,2),'LineWidth',1, 'Color', '#94d169')
-        ylabel("HRV Y/Z")
+    catch
+        disp(strcat('No section: ', char(sections(i))));
+    end 
+    
+end 
+
+%% Plot all the slopes for the sections for a participant to evaluate data quality
+
+clear;
+
+LOAD_DIR = '/Volumes/Seagate/danslaNature/analysis/data/Journal_final_participants/014/';
+sections = {'before_forest','stop0_stumps_sitting','stop1_breathing','stop2_oldtree','walking3_barefoot','stop3_ferns','stop4_pinetrees','stop4_nixon', 'after_forest'};
+
+for i=1:length(sections)
+    
+    try 
+        load(strcat(LOAD_DIR,char(sections(i)),"_slopes.mat"));
+
+        figure
+        subplot(3,1,1)
+        plot(unix_to_datetime(EDA(:,1)),EDA(:,2),'LineWidth',1, 'Color', '#f6a753')
+        ylabel("EDA (us)")
+        title(char(sections(i)))
+        set(gca,'FontSize',14) 
+
+        subplot(3,1,2)  
+        plot(unix_to_datetime(TEMP(:,1)),TEMP(:,2),'LineWidth',1,'Color', '#699bdd')
+        ylabel("Temperature (C)")
         set(gca,'FontSize',14)
 
-        subplot(5,1,5)
-        plot(unix_to_datetime(HRVZ_window(:,1)), HRVZ_window(:,2),'LineWidth',1, 'Color', '#94d169')
-        ylabel("HRV Z")
-        xlabel("Time (seconds)")
+        subplot(3,1,3)
+        plot(unix_to_datetime(HR(:,1)), HR(:,2),'LineWidth',1, 'Color', '#94d169')
+        ylabel("Heart rate")
         set(gca,'FontSize',14)
     catch
         disp(strcat('No section: ', char(sections(i))));
     end 
     
 end 
+
 
 
 

@@ -11,9 +11,9 @@ clear;
 
 LOAD_DIR = '/Volumes/Seagate/danslaNature/analysis/data/Journal_final_participants/';
 OUT_DIR = '/Volumes/Seagate/danslaNature/analysis/statistical_analysis/2_final_analysis/DataTables/';
-SAVE_NAME = 'dln_mixedmodel_long_witheffects';
+SAVE_NAME = 'dln_mixedmodel_long';
 
-stops = {'before_forest','after_forest','stop0_stumps_sitting','stop1_breathing','stop2_oldtree','stop3_ferns','stop4_pinetrees','walking3_barefoot'};
+stops = {'before_forest','stop0_stumps_sitting','stop1_breathing','stop2_oldtree','walking3_barefoot','stop3_ferns','stop4_pinetrees','after_forest'};
 D = dir(LOAD_DIR);
 participants = setdiff({D([D.isdir]).name},{'.','..'}); % list of subfolders of D
 
@@ -47,7 +47,7 @@ tableRow = [];
 for k=1:length(participants)
     
     % Get group of participant
-    participant = str2double(participants(k))
+    participant = str2double(participants(k));
 
     if any(ismember(group1_participants,participant))
         group = 1;

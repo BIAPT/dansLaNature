@@ -14,7 +14,7 @@ aveHRVYZ = [];
 aveHRVZ = [];
 
 % Init table with empty columns
-newT = table(Participants,Section,stdEDAslopes,medTEMPslopes,medHRslopes,aveHR,aveHRVYZ,aveHRVZ);
+%newT = table(Participants,Stop,stdEDAslopes,medTEMPslopes,medHRslopes,aveHR,aveHRVYZ,aveHRVZ);
 
 %For each participant
 for i=1:size(T,1)
@@ -27,4 +27,4 @@ for i=1:size(T,1)
 end 
 
 % Save as csv file
-writetable(newT,strcat(OUT_DIR,'JASPtable_prepost.csv'));
+%writetable(newT,strcat(OUT_DIR,'JASPtable_prepost.csv'));
