@@ -4,6 +4,7 @@ function aveSlopes = computeSlopes(data, fs, win_size, win_step)
 % fs - sampling rate
 % winsize - window size in seconds
 % winstep - step size in seconds
+% Slope = dy/dx, where dx is 1/fs = 1/15 --> multipl7 diff(y) by 15
 
 time = data(:,1);
 aveSlopes = [];
@@ -19,7 +20,7 @@ if fs == 0
     i3 = 1;
     
     while i2 <= length(data)
-        aveSlopes(i3,2) = mean(diff(data(i1:i2,2))); % average slopes
+        aveSlopes(i3,2) = mean(diff(data(i1:i2,2))./ diff(convert_time(i1:i2,1))); % average pt to pt slopes in that window
         aveSlopes(i3,1) = time(i1);
         
         i3=i3+1; 
@@ -35,7 +36,7 @@ else
     % need to remove it
     data_wins = buffer(data(:,2),win_size*fs,win_overlap*fs,'nodelay');
 
-    slopes = diff(data_wins);
+    slopes = diff(data_wins).*fs;
     aveSlopes(:,2) = mean(slopes(:,1:end-1)); % not taking the last slope 
     time_idx = 1:win_step*fs:length(data);
     num_wins = size(data_wins,2);

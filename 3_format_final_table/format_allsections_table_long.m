@@ -10,8 +10,8 @@
 clear;
 
 LOAD_DIR = '/Volumes/Seagate/danslaNature/analysis/data/Journal_final_participants/';
-OUT_DIR = '/Volumes/Seagate/danslaNature/analysis/statistical_analysis/2_final_analysis/DataTables/';
-SAVE_NAME = 'dln_mixedmodel_long';
+OUT_DIR = '/Volumes/Seagate/danslaNature/analysis/statistical_analysis/2_final_analysis/DataTables2/';
+SAVE_NAME = 'dln_final_long';
 
 stops = {'before_forest','stop0_stumps_sitting','stop1_breathing','stop2_oldtree','walking3_barefoot','stop3_ferns','stop4_pinetrees','after_forest'};
 D = dir(LOAD_DIR);
@@ -37,9 +37,11 @@ stdEDAslopes = [];
 medTEMPslopes = [];
 medHRslopes = [];
 aveHR = [];
+aveHRVYZ = [];
+aveHRVZ = [];
 
 % Init table with empty columns
-dataTable = table(participant,group,meanDailyTemperature,stop,stdEDAslopes,medTEMPslopes,medHRslopes,aveHR);
+dataTable = table(participant,group,meanDailyTemperature,stop,stdEDAslopes,medTEMPslopes,medHRslopes,aveHR,aveHRVYZ,aveHRVZ);
 
 tableRow = [];
 
@@ -90,14 +92,22 @@ for k=1:length(participants)
             % Compute mean of HR
             meanHR = mean(aves.HR(:,2),'omitnan');
             
+            % Compute mean HRV LF/HF
+            meanHRVYZ = mean(aves.HRVYZ(:,2),'omitnan');
+            
+            % Compute mean HRV HF
+            meanHRVZ = mean(aves.HRVZ(:,2),'omitnan');
+            
         catch 
             stdEDAslopes = nan;
             medianHRslopes = nan;
             medianTEMPslopes = nan;
             meanHR = nan;
+            meanHRVYZ = nan;
+            meanHRVZ = nan;
         end 
 
-        tableRow = [participant,group,meanDailyTemperature, stops(i), stdEDAslopes,medianTEMPslopes,medianHRslopes,meanHR];
+        tableRow = [participant,group,meanDailyTemperature, stops(i), stdEDAslopes,medianTEMPslopes,medianHRslopes,meanHR,meanHRVYZ,meanHRVZ];
 
         dataTable = [dataTable; tableRow];
         tableRow = [];

@@ -67,11 +67,11 @@ save(strcat(file,'_slopes.mat'),'-struct','slopes');
 %% Extract a single segment and save it 
 
 clear;
-load('/Volumes/Seagate/danslaNature/analysis/data/Journal_final_participants/016/clean.mat')
-OUT_DIR = "/Volumes/Seagate/danslaNature/analysis/data/Journal_final_participants/016/";
-start_time = datetime('2020-09-19 16:14:00','InputFormat','yyyy-MM-dd HH:mm:ss','TimeZone','America/New_York');
-end_time = datetime('2020-09-19 16:21:00','InputFormat','yyyy-MM-dd HH:mm:ss','TimeZone','America/New_York');
-segment_name = 'walking3_barefoot';
+load('/Volumes/Seagate/danslaNature/analysis/data/Journal_final_participants/011/clean.mat')
+OUT_DIR = "/Volumes/Seagate/danslaNature/analysis/data/Journal_final_participants/011/";
+start_time = datetime('2020-09-19 16:21:00','InputFormat','yyyy-MM-dd HH:mm:ss','TimeZone','America/New_York');
+end_time = datetime('2020-09-19 16:43:00','InputFormat','yyyy-MM-dd HH:mm:ss','TimeZone','America/New_York');
+segment_name = 'stop3_ferns';
 
 % Find the window in data by finding the closest time to t1 and t2.
 EDA_time = unix_to_datetime(EDA(:,1));
@@ -441,7 +441,7 @@ legend("Sept 19", "Sept 26, Sept 27");
 
 clear;
 
-LOAD_DIR = '/Volumes/Seagate/danslaNature/analysis/data/Journal_final_participants/045/';
+LOAD_DIR = '/Volumes/Seagate/danslaNature/analysis/data/2020-09-27/group2/056/';
 sections = {'before_forest','stop0_stumps_sitting','stop1_breathing','stop2_oldtree','walking3_barefoot','stop3_ferns','stop4_pinetrees','stop4_nixon', 'after_forest'};
 
 for i=1:length(sections)
