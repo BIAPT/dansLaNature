@@ -1,11 +1,11 @@
 % Format pre-post JASP table from all sections JASP table
 
-OUT_DIR = '/Volumes/Seagate/danslaNature/JASP_analysis/pre-post/final/';
-T = readtable('/Volumes/Seagate/danslaNature/JASP_analysis/allsection/final/JASPtable2.csv');
+OUT_DIR = '/Volumes/Seagate/danslaNature/analysis/statistical_analysis/2_final_analysis/DataTables/';
+T = readtable('/Volumes/Seagate/danslaNature/analysis/statistical_analysis/2_final_analysis/DataTables/dln_final_wide_alldays.csv');
 
 % Columns of new table 
 Participants = [];
-Section = [];
+Stop = [];
 stdEDAslopes = [];
 medTEMPslopes = [];
 medHRslopes = [];
@@ -14,7 +14,7 @@ aveHRVYZ = [];
 aveHRVZ = [];
 
 % Init table with empty columns
-%newT = table(Participants,Stop,stdEDAslopes,medTEMPslopes,medHRslopes,aveHR,aveHRVYZ,aveHRVZ);
+newT = table(Participants,Stop,stdEDAslopes,medTEMPslopes,medHRslopes,aveHR,aveHRVYZ,aveHRVZ);
 
 %For each participant
 for i=1:size(T,1)
@@ -27,4 +27,4 @@ for i=1:size(T,1)
 end 
 
 % Save as csv file
-%writetable(newT,strcat(OUT_DIR,'JASPtable_prepost.csv'));
+writetable(newT,strcat(OUT_DIR,'dln_final_wide_prepost.csv'));
